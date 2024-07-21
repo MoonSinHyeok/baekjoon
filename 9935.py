@@ -13,27 +13,32 @@ start_check = deque()
 
 for c in str:
   ans.append(c)
-
+  # print(start_check)
+  # print(ans)
+  # print()
+  if c == explosion[0] != explosion[cursor]:
+    cursor = 0
   if c == explosion[cursor]:
-    # print(start_check)
-    # print(ans)
     if cursor == 0:
+      if len(explosion) == 1:
+        ans.pop()
+        continue
       start_check.append(len(ans) - 1)
     cursor += 1
     if cursor == len(explosion):
       cursor = 0
       for _ in range(len(explosion)):
         ans.pop()
-
+      start_check.pop()
       if start_check:
+        tmp = 0
         for i in range(start_check[-1], len(ans)):
-          if ans[i] == explosion[cursor]:
-            cursor += 1
+          if ans[i] == explosion[tmp]:
+            tmp += 1
           else:
-            cursor = 0
             break
         else:
-          start_check.pop()
+          cursor = tmp
   else:
     cursor = 0
 
