@@ -5,11 +5,15 @@
 # all: S를 {1, 2, ..., 20} 으로 바꾼다.
 # empty: S를 공집합으로 바꾼다.
 
+import sys
+
+input = sys.stdin.readline
+
 S = set([])
 M = int(input())
 
 for _ in range(M):
-  order = input()
+  order = input().rstrip("\n")
   if order == "all":
     S = set([i for i in range(1, 21)])
   elif order == "empty":
