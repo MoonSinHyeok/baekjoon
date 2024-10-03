@@ -1,24 +1,18 @@
-li = []
-for _ in range(3):
-  li.append(input())
+N = int(input())
 
-num = []
-for i in range(3):
-  if li[i] == "Fizz":
-    pass
-  elif li[i] == "Buzz":
-    pass
-  elif li[i] == "FizzBuzz":
-    pass
-  else:
-    num.append((int(li[i]), i))
+dp = [['1']]
 
-next = num[-1][0] + (3 - num[-1][1])
-if next % 3 == 0 and next % 5 == 0:
-  print("FizzBuzz")
-elif next % 3 == 0:
-  print("Fizz")
-elif next % 5 == 0:
-  print("Buzz")
-else:
-  print(next)
+for i in range(1, N + 1):
+  next = []
+  carry = 0
+  for j in range(len(dp[i - 1]) - 1, -1, -1):
+    tmp = int(dp[i - 1][j]) * i + carry
+    carry = tmp // 10
+    remain = tmp % 10
+    next.insert(0, str(remain))
+  if carry:
+    next.insert(0, str(carry))
+  dp.append(next)
+
+for e in dp[N]:
+  print(e, end='')
